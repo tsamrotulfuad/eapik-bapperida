@@ -7,6 +7,7 @@
     <title>e-APIK | Bapperida Kota Pasuruan</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logo/favicon.ico') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
@@ -63,10 +64,10 @@
         <img src="{{ asset('img/cover/kantor-bapperida.webp')}}" class="card-img" style="height: 980px" alt="kantor-bapperida">
         <!-- d-flex centers the text container; justify and align center the text within it -->
         <div class="card-img-overlay d-flex flex-column justify-content-center text-center">
-            <h3 class="card-title display-2">Menuju Kota Pasuruan yang <b>"ANUGRAH"</b></h3>
-            <h3 class="card-title display-6 mb-3">Aktif pelayanan publiknya, Mandiri ekonominya, Guyub warganya, dan Indah kotanya</h3>
-            <p class="card-text h4">BADAN PERENCANAAN PEMBANGUNAN, RISET DAN INOVASI DAERAH</p>
-            <p class="card-text h4">KOTA PASURUAN</p>
+            <h3 class="card-title display-2 animate__animated animate__fadeInDown">Menuju Kota Pasuruan yang <b>"ANUGRAH"</b></h3>
+            <h3 class="card-title display-6 mb-3 animate__animated animate__fadeInDown">Aktif pelayanan publiknya, Mandiri ekonominya, Guyub warganya, dan Indah kotanya</h3>
+            <p class="card-text h4 animate__animated animate__backInDown animate__delay-1s">BADAN PERENCANAAN PEMBANGUNAN, RISET DAN INOVASI DAERAH</p>
+            <p class="card-text h4 animate__animated animate__backInDown animate__delay-1s">KOTA PASURUAN</p>
         </div>
     </div>
 
