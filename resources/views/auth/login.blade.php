@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
 
     <!-- Page CSS -->
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
     <!-- Page -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/pages/page-auth.css') }}" />
 
