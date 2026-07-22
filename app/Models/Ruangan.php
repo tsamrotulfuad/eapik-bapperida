@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
-#[Fillable(['nama', 'keterangan'])]
-class Bidang extends Model
+#[Fillable(['nama_ruangan', 'status'])]
+class Ruangan extends Model
 {
     // Membuat UUID
     protected static function booted()
     {
-        static::creating(function ($bidang) {
-            $bidang->uuid = (string) Str::uuid();
+        static::creating(function ($ruangan) {
+            $ruangan->uuid = (string) Str::uuid();
         });
     }
 

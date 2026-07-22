@@ -1,7 +1,7 @@
 @extends('admin.app')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
+<div class="container-fluid flex-grow-1 container-p-y">
     <div class="row">
         <div class="col-12 order-3 order-md-2">
             <div class="row">
@@ -9,20 +9,20 @@
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="mb-0">Manajemen User</h4>
+                            <h4 class="mb-0">Manajemen Ruangan</h4>
 
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahUser">
-                                <i class="bx bx-plus"></i> Tambah User
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBidang">
+                                <i class="bx bx-plus"></i> Tambah Ruangan
                             </button>
-                            <div class="modal fade" id="modalTambahUser" tabindex="-1">
+                            <div class="modal fade" id="modalTambahBidang" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
-                                        <form action="/admin/users" method="POST">
+                                        <form action="/admin/ruangans" method="POST">
                                             @csrf
 
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Tambah User</h5>
+                                                <h5 class="modal-title">Tambah Ruangan</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
 
@@ -30,26 +30,12 @@
 
                                                 <div class="mb-3">
                                                     <label>Nama</label>
-                                                    <input type="text" name="name" class="form-control" required>
+                                                    <input type="text" name="nama_ruangan" class="form-control" required>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label>Email</label>
-                                                    <input type="email" name="email" class="form-control" required>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label>Password</label>
-                                                    <input type="password" name="password" class="form-control" required>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label>Role</label>
-                                                    <select name="role" class="form-select" required>
-                                                        <option value="">Pilih role</option>
-                                                        <option value="admin">Admin</option>
-                                                        <option value="user">User</option>
-                                                    </select>
+                                                    <label>Status</label>
+                                                    <input type="text" name="status" class="form-control" required>
                                                 </div>
 
                                             </div>
@@ -77,52 +63,45 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
+                                        <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    @foreach ($users as $user)
+                                    @foreach ($ruangans as $ruangan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->role }}</td>
-
+                                        <td>{{ $ruangan->nama_ruangan }}</td>
+                                        <td>{{ $ruangan->status }}</td>
                                         <td>
-                                            
                                             <!-- Show -->
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showUser{{ $user->id }}">
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showRuangan{{ $ruangan->id }}">
                                                 <i class="bx bx-show"></i>
                                             </button>
 
                                             <!-- Edit -->
-                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUser{{ $user->id }}">
+                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editRuangan{{ $ruangan->id }}">
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
-                                            @if ($user->role !== "admin") 
-                                                 <!-- Delete -->
-                                                <form action="/admin/users/{{ $user->id }}" method="POST" style="display:inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm">
-                                                        <i class="bx bx-trash"></i>
-                                                    </button>
-                                                </form>
-                                            @endif
-                                           
+                                            <!-- Delete -->
+                                            <form action="/admin/ruangans/{{ $ruangan->id }}" method="POST" style="display:inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm btn-delete">
+                                                    <i class="bx bx-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
 
-                                    {{-- Show data user --}}
-                                    <div class="modal fade" id="showUser{{ $user->id }}" tabindex="-1">
+                                    {{-- Show data Ruangan --}}
+                                    <div class="modal fade" id="showRuangan{{ $ruangan->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Detail User</h5>
+                                                    <h5 class="modal-title">Detail Ruangan</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
 
@@ -130,17 +109,12 @@
 
                                                     <div class="mb-3">
                                                         <label>Nama</label>
-                                                        <input type="text" class="form-control" value="{{ $user->name }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $ruangan->nama_ruangan }}" readonly>
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label>Email</label>
-                                                        <input type="text" class="form-control" value="{{ $user->email }}" readonly>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label>Role</label>
-                                                        <input type="text" class="form-control" value="{{ $user->role }}" readonly>
+                                                        <label>Status</label>
+                                                        <input type="text" class="form-control" value="{{ $ruangan->status }}" readonly>
                                                     </div>
 
                                                 </div>
@@ -155,17 +129,17 @@
                                         </div>
                                     </div>
 
-                                    {{-- Edit data user --}}
-                                    <div class="modal fade" id="editUser{{ $user->id }}" tabindex="-1">
+                                    {{-- Edit data Bidang --}}
+                                    <div class="modal fade" id="editRuangan{{ $ruangan->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
 
-                                                <form action="/admin/users/{{ $user->id }}" method="POST">
+                                                <form action="/admin/ruangans/{{ $ruangan->id }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
 
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Edit User</h5>
+                                                        <h5 class="modal-title">Edit Ruangan</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
 
@@ -173,20 +147,12 @@
 
                                                         <div class="mb-3">
                                                             <label>Nama</label>
-                                                            <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+                                                            <input type="text" name="nama_ruangan" class="form-control" value="{{ $ruangan->nama_ruangan }}" required>
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label>Email</label>
-                                                            <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label>Role</label>
-                                                            <select name="role" class="form-select" required>
-                                                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                                                                <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
-                                                            </select>
+                                                            <label>Status</label>
+                                                            <input type="text" name="status" class="form-control" value="{{ $ruangan->status }}" required>
                                                         </div>
 
                                                     </div>
@@ -219,3 +185,4 @@
     </div>
 </div>
 @endsection
+

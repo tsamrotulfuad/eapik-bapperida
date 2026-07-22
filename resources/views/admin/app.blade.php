@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
-    data-assets-path="{{ asset('admin/assets/') }}" data-template="vertical-menu-template-free">
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('admin/assets/') }}" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Dashboard</title>
 
@@ -17,18 +15,14 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/boxicons.css') }}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/core.css') }}"
-        class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}"
-        class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('admin/assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
@@ -61,8 +55,7 @@
                         {{-- <span class="app-brand-text demo menu-text fw-bolder ms-2">E-APIK</span> --}}
                     </a>
 
-                    <a href="javascript:void(0);"
-                        class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
                 </div>
@@ -71,10 +64,26 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item"> {{-- active --}}
+                <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"> {{-- active --}}
                         <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+                    <!-- Menu -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Main Menu</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('agendas.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-data"></i>
+                            <div data-i18n="Analytics">Agenda</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('kegiatans.index') ? 'active' : '' }}">
+                        <a href="{{ route('kegiatans.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-data"></i>
+                            <div data-i18n="Analytics">Kegiatan</div>
                         </a>
                     </li>
                     <!-- Bidang Rendalev -->
@@ -133,16 +142,22 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Setting</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
                         <a href="{{ route('users.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">User</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->routeIs('bidangs.index') ? 'active' : '' }}">
                         <a href="{{ route('bidangs.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Bidang</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('ruangans.index') ? 'active' : '' }}">
+                        <a href="{{ route('ruangans.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Ruangan</div>
                         </a>
                     </li>
 
@@ -154,8 +169,7 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
+                <nav class="layout-navbar container-fluid navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                             <i class="bx bx-menu bx-sm"></i>
@@ -167,11 +181,9 @@
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('admin/assets/img/avatars/1.png') }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        <img src="{{ asset('admin/assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -180,8 +192,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('admin/assets/img/avatars/1.png') }}" alt
-                                                            class="w-px-40 h-auto rounded-circle" />
+                                                        <img src="{{ asset('admin/assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -210,14 +221,12 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                             </form>
                                         </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none"></form>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"></form>
                                     </li>
                                 </ul>
                             </li>
@@ -236,12 +245,12 @@
 
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme">
-                        <div
-                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                             <div class="mb-2 mb-md-0">
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear());
+
                                 </script> Made with ❤️
                             </div>
                         </div>
