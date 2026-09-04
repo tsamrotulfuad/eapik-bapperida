@@ -9,20 +9,20 @@
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="mb-0">Manajemen Bidang</h4>
+                            <h4 class="mb-0">Manajemen Agenda</h4>
 
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBidang">
-                                <i class="bx bx-plus"></i> Tambah Bidang
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahAgenda">
+                                <i class="bx bx-plus"></i> Tambah Agenda
                             </button>
-                            <div class="modal fade" id="modalTambahBidang" tabindex="-1">
+                            <div class="modal fade" id="modalTambahAgenda" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
-                                        <form action="/admin/bidangs" method="POST">
+                                        <form action="/admin/agendas" method="POST">
                                             @csrf
 
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Tambah Bidang</h5>
+                                                <h5 class="modal-title">Tambah Agenda</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
 
@@ -68,24 +68,23 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    @foreach ($bidangs as $bidang)
+                                    @foreach ($agendas as $agenda)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $bidang->nama }}</td>
-                                        <td>{{ $bidang->keterangan }}</td>
+                                        <td>{{ $agenda->nama }}</td>
                                         <td>
                                             <!-- Show -->
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showBida{{ $bidang->id }}">
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showAgenda{{ $agenda->id }}">
                                                 <i class="bx bx-show"></i>
                                             </button>
 
                                             <!-- Edit -->
-                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editBidang{{ $bidang->id }}">
+                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editAgenda{{ $agenda->id }}">
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
                                             <!-- Delete -->
-                                            <form action="/admin/bidangs/{{ $bidang->id }}" method="POST" style="display:inline">
+                                            <form action="/admin/agendas/{{ $agenda->id }}" method="POST" style="display:inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm">
@@ -95,13 +94,13 @@
                                         </td>
                                     </tr>
 
-                                    {{-- Show data Bidang --}}
-                                    <div class="modal fade" id="showBidang{{ $bidang->id }}" tabindex="-1">
+                                    {{-- Show data agenda --}}
+                                    <div class="modal fade" id="showAgenda{{ $agenda->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Detail Bidang</h5>
+                                                    <h5 class="modal-title">Detail Agenda</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
 
@@ -109,12 +108,12 @@
 
                                                     <div class="mb-3">
                                                         <label>Nama</label>
-                                                        <input type="text" class="form-control" value="{{ $bidang->nama }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $agenda->nama }}" readonly>
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label>Keterangan</label>
-                                                        <input type="text" class="form-control" value="{{ $bidang->keterangan }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $agenda->keterangan }}" readonly>
                                                     </div>
 
                                                 </div>
@@ -129,17 +128,17 @@
                                         </div>
                                     </div>
 
-                                    {{-- Edit data Bidang --}}
-                                    <div class="modal fade" id="editBidang{{ $bidang->id }}" tabindex="-1">
+                                    {{-- Edit data agenda --}}
+                                    <div class="modal fade" id="editAgenda{{ $agenda->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
 
-                                                <form action="/admin/bidangs/{{ $bidang->id }}" method="POST">
+                                                <form action="/admin/agendas/{{ $agenda->id }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
 
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Edit Bidang</h5>
+                                                        <h5 class="modal-title">Edit Agenda</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
 
@@ -147,12 +146,12 @@
 
                                                         <div class="mb-3">
                                                             <label>Nama</label>
-                                                            <input type="text" name="nama" class="form-control" value="{{ $bidang->nama }}" required>
+                                                            <input type="text" name="nama" class="form-control" value="{{ $agenda->nama }}" required>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label>keterangan</label>
-                                                            <input type="text" name="keterangan" class="form-control" value="{{ $bidang->keterangan }}" required>
+                                                            <input type="text" name="keterangan" class="form-control" value="{{ $agenda->keterangan }}" required>
                                                         </div>
 
                                                     </div>

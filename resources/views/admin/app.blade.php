@@ -74,7 +74,7 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Main Menu</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->routeIs('agendas.index') ? 'active' : '' }}">
                         <a href="{{ route('agendas.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-data"></i>
                             <div data-i18n="Analytics">Agenda</div>
@@ -158,6 +158,12 @@
                         <a href="{{ route('ruangans.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Ruangan</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('medias.index') ? 'active' : '' }}">
+                        <a href="{{ route('medias.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Media</div>
                         </a>
                     </li>
 

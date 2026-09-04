@@ -4,11 +4,13 @@ use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\BidangController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KegiatanController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\RuanganController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\HomeController;
+use App\Models\Media;
 use Illuminate\Support\Facades\Route;
 
 // Home
@@ -35,5 +37,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('/agendas', AgendaController::class); // Agenda
     Route::resource('/ruangans', RuanganController::class); // Ruangan
     Route::resource('/kegiatans', KegiatanController::class); // Kegiatan
+    Route::resource('/medias', MediaController::class); // Media
 });
 

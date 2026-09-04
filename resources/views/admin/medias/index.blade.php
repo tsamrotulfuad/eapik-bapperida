@@ -9,20 +9,20 @@
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="mb-0">Manajemen Kegiatan</h4>
+                            <h4 class="mb-0">Manajemen Media</h4>
 
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBidang">
-                                <i class="bx bx-plus"></i> Tambah Kegiatan
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahMedia">
+                                <i class="bx bx-plus"></i> Tambah Media
                             </button>
-                            <div class="modal fade" id="modalTambahBidang" tabindex="-1">
+                            <div class="modal fade" id="modalTambahMedia" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
-                                        <form action="/admin/kegiatans" method="POST">
+                                        <form action="/admin/medias" method="POST">
                                             @csrf
 
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Tambah Kegiatan</h5>
+                                                <h5 class="modal-title">Tambah Media</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
 
@@ -122,14 +122,14 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    @foreach ($kegiatans as $kegiatan)
+                                    @foreach ($medias as $media)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $kegiatan->tanggal_kegiatan }}</td>
-                                        <td>{{ $kegiatan->waktu_mulai }}</td>
-                                        <td>{{ $kegiatan->waktu_selesai }}</td>
-                                        <td>{{ $kegiatan->status }}</td>
+                                        <td>{{ $media->nama_kegiatan }}</td>
+                                        <td>{{ $media->tanggal_kegiatan }}</td>
+                                        <td>{{ $media->waktu_mulai }}</td>
+                                        <td>{{ $media->waktu_selesai }}</td>
+                                        <td>{{ $media->status }}</td>
                                         <td>
                                             <!-- Show -->
                                             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showKegiatan{{ $kegiatan->id }}">
@@ -142,7 +142,7 @@
                                             </button>
 
                                             <!-- Delete -->
-                                            <form action="/admin/kegiatans/{{ $kegiatan->id }}" method="POST" style="display:inline">
+                                            <form action="/admin/medias/{{ $media->id }}" method="POST" style="display:inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm btn-delete">
@@ -153,12 +153,12 @@
                                     </tr>
 
                                     {{-- Show data Kegiatan --}}
-                                    <div class="modal fade" id="showKegiatan{{ $kegiatan->id }}" tabindex="-1">
+                                    <div class="modal fade" id="showMedia{{ $media->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Detail Kegiatan</h5>
+                                                    <h5 class="modal-title">Detail Media</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
 
@@ -166,31 +166,31 @@
 
                                                     <div class="mb-3">
                                                         <label>Nama</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->nama_kegiatan }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $media->nama_kegiatan }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->deskripsi }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $media->deskripsi }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Mulai</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->waktu_mulai }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $media->waktu_mulai }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Selesai </label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->waktu_selesai }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $media->waktu_selesai }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Bidang </label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->bidang->nama }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $media->bidang->nama }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Ruangan </label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->ruangan->nama_ruangan }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $media->ruangan->nama_ruangan }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Status</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->status }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $media->status }}" readonly>
                                                     </div>
 
                                                 </div>
@@ -205,17 +205,17 @@
                                         </div>
                                     </div>
 
-                                    {{-- Edit data Kegiatan --}}
-                                    <div class="modal fade" id="editKegiatan{{ $kegiatan->id }}" tabindex="-1">
+                                    {{-- Edit data Media --}}
+                                    <div class="modal fade" id="editMedia{{ $media->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
 
-                                                <form action="/admin/kegiatans/{{ $kegiatan->id }}" method="POST">
+                                                <form action="/admin/medias/{{ $media->id }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
 
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Edit Kegiatan</h5>
+                                                        <h5 class="modal-title">Edit Media</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
 
