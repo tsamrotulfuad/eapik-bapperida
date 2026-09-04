@@ -29,37 +29,10 @@
 
         </div>
     </header>
-    <nav class="py-2 bg-body-tertiary">
-        <div class="container d-flex flex-wrap">
-            <ul class="nav me-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link link-body-emphasis px-3 active" aria-current="page">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link link-body-emphasis px-3">Dokumen</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link link-body-emphasis px-3">Kajian</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link link-body-emphasis px-3">Riset</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link link-body-emphasis px-3">Inovasi</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link link-body-emphasis px-3">Kemiskinan</a>
-                </li>
-            </ul>
-            <ul class="nav">
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link link-body-emphasis px-2">Login</a>
-                </li> --}}
-            </ul>
 
-        </div>
-    </nav>
-
+    <!-- Navbar -->
+    @include('navbar')
+    
     <div class="card bg-dark text-white border-0">
         <img src="{{ asset('img/cover/kantor-bapperida.webp')}}" class="card-img" style="height: 980px" alt="kantor-bapperida">
         <!-- d-flex centers the text container; justify and align center the text within it -->

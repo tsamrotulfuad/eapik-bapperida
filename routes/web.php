@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\BidangController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KajianController;
 use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\RuanganController;
@@ -10,11 +11,14 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\HomeController;
-use App\Models\Media;
+use App\Http\Controllers\KajianController as Kajian;
 use Illuminate\Support\Facades\Route;
 
 // Home
 Route::get('/', [HomeController::class, 'index']);
+
+// Kajian
+Route::get('/kajian', [Kajian::class, 'index'])->name('kajian');
 
 // Display
 Route::get('/display', [DisplayController::class, 'index']);
@@ -38,5 +42,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('/ruangans', RuanganController::class); // Ruangan
     Route::resource('/kegiatans', KegiatanController::class); // Kegiatan
     Route::resource('/medias', MediaController::class); // Media
+    Route::resource('/kajian', KajianController::class); // Kajian
 });
 
