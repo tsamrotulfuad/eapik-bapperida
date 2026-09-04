@@ -37,6 +37,7 @@ class KegiatanController extends Controller
         $request->validate([
             'nama_kegiatan' => 'required',
             'deskripsi' => 'required',
+            'tanggal_kegiatan' => 'required',
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required',
             'bidang_id' => 'required',
@@ -47,6 +48,7 @@ class KegiatanController extends Controller
         Kegiatan::create([
             'nama_kegiatan' => $request->nama_kegiatan,
             'deskripsi'     => $request->deskripsi,
+            'tanggal_kegiatan' => $request->tanggal_kegiatan,
             'waktu_mulai'   => $request->waktu_mulai,
             'waktu_selesai' => $request->waktu_selesai,
             'bidang_id'     => $request->bidang_id,
@@ -83,6 +85,7 @@ class KegiatanController extends Controller
         $request->validate([
             'nama_kegiatan' => 'required',
             'deskripsi' => 'required',
+            'tanggal_kegiatan' => 'required',
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required',
             'bidang_id' => 'required',
@@ -93,6 +96,7 @@ class KegiatanController extends Controller
         $kegiatan->update([
             'nama_kegiatan' => $request->nama_kegiatan,
             'deskripsi'     => $request->deskripsi,
+            'tanggal_kegiatan' => $request->tanggal_kegiatan,
             'waktu_mulai'   => $request->waktu_mulai,
             'waktu_selesai' => $request->waktu_selesai,
             'bidang_id'     => $request->bidang_id,
@@ -100,7 +104,7 @@ class KegiatanController extends Controller
             'status'        => $request->status
         ]);
 
-        return redirect('/admin/kegiatans')->with('success', 'Ruangan Berhasil dibuah!');
+        return redirect('/admin/kegiatans')->with('success', 'Kegiatan Berhasil dibuah!');
     }
 
     /**
@@ -108,6 +112,8 @@ class KegiatanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Kegiatan::findOrFail($id)->delete();
+
+        return back()->with('success', 'Kegiatan Berhasil dihapus!');
     }
 }

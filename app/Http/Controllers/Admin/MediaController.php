@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Agenda;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
-class AgendaController extends Controller
+class MediaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $agendas = Agenda::all();
-
-        return view('admin.agendas.index', compact('agendas'));
+        $media = Media::all();
+        return view('admin.medias.index', compact('media'));
     }
 
     /**

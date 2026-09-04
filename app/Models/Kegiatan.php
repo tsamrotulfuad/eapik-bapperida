@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 #[Fillable([
     'nama_kegiatan',
     'deskripsi',
+    'tanggal_kegiatan',
     'waktu_mulai',
     'waktu_selesai',
     'bidang_id',
