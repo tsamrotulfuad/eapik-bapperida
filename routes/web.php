@@ -42,6 +42,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('/ruangans', RuanganController::class); // Ruangan
     Route::resource('/kegiatans', KegiatanController::class); // Kegiatan
     Route::resource('/medias', MediaController::class); // Media
-    Route::resource('/kajian', KajianController::class); // Kajian
+    Route::resource('/kajians', KajianController::class); // Kajian
 });
 

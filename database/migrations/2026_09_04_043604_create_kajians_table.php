@@ -22,7 +22,8 @@ return new class extends Migration
             $table->text('abstrak')->nullable();
             $table->string('kata_kunci')->nullable();
             $table->string('file_dokumen')->nullable();
-            $table->enum('status', ['draft', 'internal', 'publik'])->default('draft');
+            $table->string('cover')->nullable();
+            $table->enum('status', ['draft', 'internal', 'publish'])->default('draft');
             $table->foreignId('user_id');
             $table->timestamps();
         });

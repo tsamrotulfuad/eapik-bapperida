@@ -18,7 +18,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
-                                        <form action="/admin/kegiatans" method="POST">
+                                        <form action="/admin/kajians" method="POST" enctype="multipart/form-data">
                                             @csrf
 
                                             <div class="modal-header">
@@ -29,77 +29,73 @@
                                             <div class="modal-body">
 
                                                 <div class="mb-3">
-                                                    <label>Nama</label>
-                                                    <input type="text" name="nama_kegiatan" class="form-control" required>
+                                                    <label>Judul</label>
+                                                    <input type="text" name="judul" class="form-control" required>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label>Deskripsi</label>
-                                                    <input type="text" name="deskripsi" class="form-control" required>
+                                                    <label>Penulis</label>
+                                                    <input type="text" name="penulis" class="form-control" required>
                                                 </div>
-                                                <div class="mb-3 row">
-                                                    <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Tanggal</label>
-                                                    <div class="col-md-10">
-                                                        <input class="form-control" name="tanggal_kegiatan" type="date" id="html5-date-input" />
-
-                                                    </div>
+                                                <div class="mb-3">
+                                                    <label for="bidang" class="form-label">Bidang</label>
+                                                    <select class="form-select" id="status" aria-label="Status" name="bidang_id">
+                                                        <option selected>Pilih Salah Satu</option>
+                                                        {{-- Lakukan looping data model lain --}}
+                                                        @foreach ($bidangs as $bidang)
+                                                        <option value="{{ $bidang->id }}">{{ $bidang->nama }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Mulai</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" name="waktu_mulai" type="time" id="html5-time-input" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Selesai</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" name="waktu_selesai" type="time" id="html5-time-input" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="bidang" class="form-label">Bidang</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="bidang_id">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            {{-- Lakukan looping data model lain --}}
-                                                            @foreach ($bidangs as $bidang)
-                                                            <option value="{{ $bidang->id }}">{{ $bidang->nama }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="ruangan" class="form-label">Ruangan</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="ruangan_id">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            {{-- Lakukan looping data model lain --}}
-                                                            @foreach ($ruangans as $ruangan)
-                                                            <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="status" class="form-label">Status</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="status">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            <option value="terjadwal">Terjadwal</option>
-                                                            <option value="berlangsung">Berlangsung</option>
-                                                            <option value="selesai">Selesai</option>
-                                                            <option value="batal">Batal</option>
-                                                        </select>
-                                                    </div>
-
+                                                <div class="mb-3">
+                                                    <label>Tahun terbit</label>
+                                                    <input class="form-control" type="number" name="tahun_terbit" step="1">
                                                 </div>
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        Batal
-                                                    </button>
-
-                                                    <button class="btn btn-primary">
-                                                        Simpan
-                                                    </button>
+                                                <div class="mb-3">
+                                                    <label>Jenis</label>
+                                                    <input type="text" name="jenis" class="form-control" required>
                                                 </div>
+
+                                                <div class="mb-3">
+                                                    <label for="abstrak" class="form-label">Abstrak</label>
+                                                    <textarea class="form-control" name="abstrak" id="abstrak" rows="3"></textarea>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label>Kata Kunci</label>
+                                                    <input type="text" name="kata_kunci" class="form-control" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="file_dokumen" class="form-label">File atau Dokumen (Pdf)</label>
+                                                    <input class="form-control" name="file_dokumen" type="file" id="file_dokumen" />
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="cover" class="form-label">File Cover</label>
+                                                    <input class="form-control" name="cover" type="file" id="cover" />
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="status" class="form-label">Status</label>
+                                                    <select class="form-select" id="status" aria-label="status" name="status">
+                                                        <option selected>Pilih salah satu</option>
+                                                        <option value="draft">Draft</option>
+                                                        <option value="internal">Internal</option>
+                                                        <option value="publish">Publish</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Batal
+                                                </button>
+
+                                                <button class="btn btn-primary">
+                                                    Simpan
+                                                </button>
+                                            </div>
 
                                         </form>
 
@@ -113,10 +109,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Tanggal Kegiatan</th>
-                                        <th>Waktu Mulai</th>
-                                        <th>Waktu Selesai</th>
+                                        <th>Judul</th>
+                                        <th>Bidang</th>
+                                        <th>Tahun Terbit</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -125,19 +120,40 @@
                                     @foreach ($kajians as $kajian)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kajian->nama_kegiatan }}</td>
-                                        <td>{{ $kajian->tanggal_kegiatan }}</td>
-                                        <td>{{ $kajian->waktu_mulai }}</td>
-                                        <td>{{ $kajian->waktu_selesai }}</td>
+                                        <td>{{ $kajian->judul }}</td>
+                                        <td>{{ $kajian->penulis }}</td>
+                                        <td>{{ $kajian->bidang->nama }}</td>
+                                        <td>{{ $kajian->tahun_terbit }}</td>
                                         <td>{{ $kajian->status }}</td>
                                         <td>
+                                            <div class="d-flex justify-content-start align-items-center user-name">
+                                                <div style="width: 45px; height: 90px;">
+                                                    <!-- Kontainer Gambar Sneat -->
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar me-2">
+                                                            <!-- Check if image path exists in database -->
+                                                            @if($kajian->cover)
+                                                            <img src="{{ asset('storage/' . $kajian->cover) }}"
+                                                                alt="{{ $kajian->judul }}"
+                                                                style="width: 65px; height: 90px; object-fit: cover; border-radius: 4px;">
+                                                            @else
+                                                            <!-- Optional fallback image -->
+                                                            <img src="{{ asset('images/default-thumbnail.png') }}"
+                                                                alt="No Image"
+                                                                style="width: 65px; height: 90px;">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <td>
                                             <!-- Show -->
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showKegiatan{{ $kajian->id }}">
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showKajian{{ $kajian->id }}">
                                                 <i class="bx bx-show"></i>
                                             </button>
 
                                             <!-- Edit -->
-                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editKegiatan{{ $kajian->id }}">
+                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editKajian{{ $kajian->id }}">
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
@@ -152,47 +168,91 @@
                                         </td>
                                     </tr>
 
-                                    {{-- Show data Kegiatan --}}
-                                    <div class="modal fade" id="showKegiatan{{ $kegiatan->id }}" tabindex="-1">
-                                        <div class="modal-dialog">
+                                    {{-- Show data Kajian --}}
+                                    <div class="modal fade" id="showKajian{{ $kajian->id }}" tabindex="-1">
+                                        <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Detail Kegiatan</h5>
+                                                    <h5 class="modal-title">Detail Kajian</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
 
                                                 <div class="modal-body">
+                                                    <div class="row">
+                                                        <!-- SISI KIRI: Menampilkan Cover -->
+                                                        <div class="col-md-4 text-center mb-3">
+                                                            <label class="form-label d-block fw-bold">Cover Kajian</label>
+                                                            @if($kajian->cover)
+                                                            <img src="{{ asset('storage/' . $kajian->cover) }}"
+                                                                alt="Cover Kajian"
+                                                                class="img-fluid img-thumbnail rounded shadow-sm"
+                                                                style="max-height: auto; object-fit: cover;">
+                                                            @else
+                                                            <div class="alert alert-secondary py-5 text-muted">
+                                                                <i class="bi bi-image" style="font-size: 2rem;"></i>
+                                                                <p class="small mb-0 mt-2">Tidak ada cover</p>
+                                                            </div>
+                                                            @endif
+                                                        </div>
 
-                                                    <div class="mb-3">
-                                                        <label>Nama</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->nama_kegiatan }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->deskripsi }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Mulai</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->waktu_mulai }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Selesai </label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->waktu_selesai }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Bidang </label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->bidang->nama }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Ruangan </label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->ruangan->nama_ruangan }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Status</label>
-                                                        <input type="text" class="form-control" value="{{ $kegiatan->status }}" readonly>
-                                                    </div>
+                                                        <!-- SISI KANAN: Menampilkan Data Teks & Dokumen -->
+                                                        <div class="col-md-8">
+                                                            <div class="mb-3">
+                                                                <label class="fw-bold text-muted small">Judul</label>
+                                                                <input type="text" class="form-control bg-light" value="{{ $kajian->judul }}" readonly>
+                                                            </div>
 
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label class="fw-bold text-muted">Penulis</label>
+                                                                    <input type="text" class="form-control bg-light" value="{{ $kajian->penulis }}" readonly>
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label class="fw-bold text-muted">Bidang</label>
+                                                                    <input type="text" class="form-control bg-light" value="{{ $kajian->bidang->nama }}" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-4 mb-3">
+                                                                    <label class="fw-bold text-muted">Tahun Terbit</label>
+                                                                    <input type="text" class="form-control bg-light" value="{{ $kajian->tahun_terbit }}" readonly>
+                                                                </div>
+                                                                <div class="col-md-4 mb-3">
+                                                                    <label class="fw-bold text-muted">Jenis</label>
+                                                                    <input type="text" class="form-control bg-light" value="{{ $kajian->jenis }}" readonly>
+                                                                </div>
+                                                                <div class="col-md-4 mb-3">
+                                                                    <label class="fw-bold text-muted">Status</label>
+                                                                    <div>
+                                                                        <span class="btn {{ $kajian->status == 'Publish' ? 'bg-success' : 'bg-warning' }} d-block text-white">
+                                                                            {{ $kajian->status }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label class="fw-bold text-muted small">Abstrak</label>
+                                                                <textarea class="form-control bg-light" rows="4" readonly>{{ $kajian->abstrak }}</textarea>
+                                                            </div>
+
+                                                            {{-- TOMBOL LIHAT DOKUMEN --}}
+                                                            <div class="mb-2">
+                                                                <label class="fw-bold text-muted small d-block">File Dokumen</label>
+                                                                @if($kajian->file_dokumen)
+                                                                <a href="{{ asset('storage/' . $kajian->file_dokumen) }}"
+                                                                    target="_blank"
+                                                                    class="btn btn-outline-primary btn-md mt-1">
+                                                                    <i class="bi bi-file-earmark-pdf-fill"></i> Buka Dokumen Kajian
+                                                                </a>
+                                                                @else
+                                                                <span class="text-danger small italic">File dokumen tidak tersedia</span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -205,12 +265,12 @@
                                         </div>
                                     </div>
 
-                                    {{-- Edit data Kegiatan --}}
-                                    <div class="modal fade" id="editKegiatan{{ $kegiatan->id }}" tabindex="-1">
+                                    {{-- Edit data Kajian --}}
+                                    <div class="modal fade" id="editKajian{{ $kajian->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
 
-                                                <form action="/admin/kegiatans/{{ $kegiatan->id }}" method="POST">
+                                                <form action="/admin/kajians/{{ $kajian->id }}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')
 
@@ -222,38 +282,75 @@
                                                     <div class="modal-body">
 
                                                         <div class="mb-3">
-                                                            <label>Nama</label>
-                                                            <input type="text" class="form-control" name="nama_kegiatan" value="{{ $kegiatan->nama_kegiatan }}">
+                                                            <label>Judul</label>
+                                                            <input type="text" class="form-control" name="judul" value="{{ $kajian->judul }}">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label>Deskripsi</label>
-                                                            <input type="text" class="form-control" name="deskripsi" value="{{ $kegiatan->deskripsi }}">
+                                                            <label>Penulis</label>
+                                                            <input type="text" class="form-control" name="penulis" value="{{ $kajian->penulis }}">
                                                         </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="html5-datetime-local-input" class="col-form-label">Waktu Mulai</label>
-                                                            <div class="col-md-12">
-                                                                <input class="form-control" name="waktu_mulai" type="datetime-local" id="html5-datetime-local-input" />
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Bidang</label>
+                                                            <!-- Menggunakan select option agar user bisa memilih bidang yang tersedia -->
+                                                            <select class="form-select" name="bidang_id" required>
+                                                                @foreach($bidangs as $bidang)
+                                                                <option value="{{ $bidang->id }}" {{ $kajian->bidang_id == $bidang->id ? 'selected' : '' }}>
+                                                                    {{ $bidang->nama }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label>Tahun Terbit </label>
+                                                            <input type="number" class="form-control" name="tahun_terbit" value="{{ $kajian->tahun_terbit }}">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label>Jenis </label>
+                                                            <input type="text" class="form-control" name="jenis" value="{{ $kajian->jenis }}">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label>Abstrak </label>
+                                                            <textarea class="form-control" name="abstrak" id="abstrak" rows="3">{{ $kajian->abstrak }}</textarea>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label>Kata Kunci</label>
+                                                            <input type="text" name="kata_kunci" class="form-control" value="{{ $kajian->kata_kunci }}">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">File Dokumen (PDF)</label>
+                                                            <input type="file" class="form-control" name="file_dokumen">
+                                                            @if($kajian->file_dokumen)
+                                                            <div class="form-text text-muted mt-1">
+                                                                <i class="bi bi-file-earmark-text"></i> File saat ini:
+                                                                <a href="{{ asset('storage/' . $kajian->file_dokumen) }}" target="_blank" class="text-decoration-none">
+                                                                    Lihat Dokumen
+                                                                </a>
                                                             </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">File Cover (Gambar)</label>
+                                                            <input type="file" class="form-control" name="cover" accept="image/*">
+                                                            @if($kajian->cover)
+                                                            <div class="mt-2">
+                                                                <p class="form-text text-muted mb-1">Cover saat ini:</p>
+                                                                <img src="{{ asset('storage/' . $kajian->cover) }}"
+                                                                    alt="Cover Kajian"
+                                                                    class="img-thumbnail"
+                                                                    style="max-height: 150px; width: auto; display: block;">
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Status</label>
+                                                            <!-- Menambahkan atribut name="status" yang sebelumnya hilang -->
+                                                            <select class="form-select" name="status" required>
+                                                                <option value="draft" {{ $kajian->status == 'draft' ? 'selected' : '' }}>Draft</option>
+                                                                <option value="internal" {{ $kajian->status == 'internal' ? 'selected' : '' }}>Internal</option>
+                                                                <option value="publish" {{ $kajian->status == 'publish' ? 'selected' : '' }}>Publish</option>
+                                                            </select>
                                                         </div>
 
-                                                        <div class="mb-3 row">
-                                                            <label for="html5-datetime-local-input" class="col-form-label">Waktu Selesai</label>
-                                                            <div class="col-md-12">
-                                                                <input class="form-control" name="waktu_selesai" type="datetime-local" id="html5-datetime-local-input" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Bidang </label>
-                                                            <input type="text" class="form-control" name="bidang_id" value="{{ $kegiatan->bidang->nama }}">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Ruangan </label>
-                                                            <input type="text" class="form-control" name="ruangan_id" value="{{ $kegiatan->ruangan->nama }}">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Status</label>
-                                                            <input type="text" class="form-control" name="status" value="{{ $kegiatan->status }}">
-                                                        </div>
 
                                                     </div>
 

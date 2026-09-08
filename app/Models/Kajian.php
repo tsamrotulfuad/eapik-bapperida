@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 #[Fillable([
@@ -16,6 +17,7 @@ use Illuminate\Support\Str;
     'abstrak',
     'kata_kunci',
     'file_dokumen',
+    'cover',
     'status',
     'user_id'])]
 
@@ -26,6 +28,10 @@ class Kajian extends Model
     {
         static::creating(function ($user) {
             $user->uuid = (string) Str::uuid();
+
+            if (Auth::check()) {
+                $user->user_id = Auth::id();
+            }
         });
     }
     
