@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                                 <span class="d-block mb-1">Kajian</span>
-                                <h3 class="card-title text-nowrap mb-2">0</h3>
+                                <h3 class="card-title text-nowrap mb-2">{{ $totalKajian }}</h3>
                             </div>
                         </div>
                     </div>

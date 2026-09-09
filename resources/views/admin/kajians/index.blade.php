@@ -158,13 +158,9 @@
                                             </button>
 
                                             <!-- Delete -->
-                                            <form action="/admin/kajians/{{ $kajian->id }}" method="POST" style="display:inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-sm btn-delete">
-                                                    <i class="bx bx-trash"></i>
-                                                </button>
-                                            </form>
+                                            <button class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#deleteKajian{{ $kajian->id }}">
+                                                <i class="bx bx-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
 
@@ -226,8 +222,21 @@
                                                                 <div class="col-md-4 mb-3">
                                                                     <label class="fw-bold text-muted">Status</label>
                                                                     <div>
-                                                                        <span class="btn {{ $kajian->status == 'Publish' ? 'bg-success' : 'bg-warning' }} d-block text-white">
-                                                                            {{ $kajian->status }}
+                                                                        @php
+                                                                            $statusClass = [
+                                                                                'publish' => 'bg-success',
+                                                                                'internal' => 'bg-info',
+                                                                                'draft' => 'bg-secondary',
+                                                                            ][$kajian->status] ?? 'bg-secondary';
+
+                                                                            $statusLabel = [
+                                                                                'publish' => 'Publish',
+                                                                                'internal' => 'Internal',
+                                                                                'draft' => 'Draft',
+                                                                            ][$kajian->status] ?? ucfirst($kajian->status);
+                                                                        @endphp
+                                                                        <span class="btn {{ $statusClass }} d-block text-white">
+                                                                            {{ $statusLabel }}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -366,6 +375,39 @@
 
                                                 </form>
 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- Delete confirmation modal --}}
+                                    <div class="modal fade" id="deleteKajian{{ $kajian->id }}" tabindex="-1">
+                                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <form action="/admin/kajians/{{ $kajian->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <p class="mb-0 text-wrap">
+                                                            Apakah Anda yakin ingin menghapus data kajian
+                                                            <strong class="text-wrap">{{ $kajian->judul }}</strong>?
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            Batal
+                                                        </button>
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="bx bx-trash"></i> Hapus
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

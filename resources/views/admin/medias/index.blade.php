@@ -18,7 +18,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
-                                        <form action="/admin/medias" method="POST">
+                                        <form action="/admin/medias" method="POST" enctype="multipart/form-data">
                                             @csrf
 
                                             <div class="modal-header">
@@ -29,77 +29,32 @@
                                             <div class="modal-body">
 
                                                 <div class="mb-3">
-                                                    <label>Nama</label>
-                                                    <input type="text" name="nama_kegiatan" class="form-control" required>
+                                                    <label>Judul</label>
+                                                    <input type="text" name="title" class="form-control" required>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label>Deskripsi</label>
-                                                    <input type="text" name="deskripsi" class="form-control" required>
+                                                    <label for="image" class="form-label">File Gambar</label>
+                                                    <input class="form-control" name="image" type="file" id="image" />
                                                 </div>
-                                                <div class="mb-3 row">
-                                                    <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Tanggal</label>
-                                                    <div class="col-md-10">
-                                                        <input class="form-control" name="tanggal_kegiatan" type="date" id="html5-date-input" />
-
-                                                    </div>
-                                                </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Mulai</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" name="waktu_mulai" type="time" id="html5-time-input" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Selesai</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" name="waktu_selesai" type="time" id="html5-time-input" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="bidang" class="form-label">Bidang</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="bidang_id">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            {{-- Lakukan looping data model lain --}}
-                                                            @foreach ($bidangs as $bidang)
-                                                            <option value="{{ $bidang->id }}">{{ $bidang->nama }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="ruangan" class="form-label">Ruangan</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="ruangan_id">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            {{-- Lakukan looping data model lain --}}
-                                                            @foreach ($ruangans as $ruangan)
-                                                            <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="status" class="form-label">Status</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="status">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            <option value="terjadwal">Terjadwal</option>
-                                                            <option value="berlangsung">Berlangsung</option>
-                                                            <option value="selesai">Selesai</option>
-                                                            <option value="batal">Batal</option>
-                                                        </select>
-                                                    </div>
-
+                                                <div class="mb-3">
+                                                    <label>Status</label>
+                                                    <select name="status" class="form-select" required>
+                                                        <option value="active">Active</option>
+                                                        <option value="inactive">Inactive</option>
+                                                    </select>
                                                 </div>
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        Batal
-                                                    </button>
+                                            </div>
 
-                                                    <button class="btn btn-primary">
-                                                        Simpan
-                                                    </button>
-                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Batal
+                                                </button>
+
+                                                <button class="btn btn-primary">
+                                                    Simpan
+                                                </button>
+                                            </div>
 
                                         </form>
 
@@ -113,10 +68,8 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Tanggal Kegiatan</th>
-                                        <th>Waktu Mulai</th>
-                                        <th>Waktu Selesai</th>
+                                        <th>Judul</th>
+                                        <th>Gambar</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -125,19 +78,38 @@
                                     @foreach ($medias as $media)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $media->nama_kegiatan }}</td>
-                                        <td>{{ $media->tanggal_kegiatan }}</td>
-                                        <td>{{ $media->waktu_mulai }}</td>
-                                        <td>{{ $media->waktu_selesai }}</td>
+                                        <td>{{ $media->title }}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-start align-items-center user-name">
+                                                <div style="width: 45px; height: 90px;">
+                                                    <!-- Kontainer Gambar Sneat -->
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar me-2">
+                                                            <!-- Check if image path exists in database -->
+                                                            @if($media->image)
+                                                            <img src="{{ asset('storage/' . $media->image) }}"
+                                                                alt="{{ $media->title }}"
+                                                                style="width: 65px; height: 90px; object-fit: cover; border-radius: 4px;">
+                                                            @else
+                                                            <!-- Optional fallback image -->
+                                                            <img src="{{ asset('images/default-thumbnail.png') }}"
+                                                                alt="No Image"
+                                                                style="width: 65px; height: 90px;">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{ $media->status }}</td>
                                         <td>
                                             <!-- Show -->
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showKegiatan{{ $kegiatan->id }}">
+                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showMedia{{ $media->id }}">
                                                 <i class="bx bx-show"></i>
                                             </button>
 
                                             <!-- Edit -->
-                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editKegiatan{{ $kegiatan->id }}">
+                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editMedia{{ $media->id }}">
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
@@ -152,7 +124,7 @@
                                         </td>
                                     </tr>
 
-                                    {{-- Show data Kegiatan --}}
+                                    {{-- Show data Media --}}
                                     <div class="modal fade" id="showMedia{{ $media->id }}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -165,34 +137,17 @@
                                                 <div class="modal-body">
 
                                                     <div class="mb-3">
-                                                        <label>Nama</label>
-                                                        <input type="text" class="form-control" value="{{ $media->nama_kegiatan }}" readonly>
+                                                        <label>Judul</label>
+                                                        <input type="text" class="form-control" value="{{ $media->title }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" value="{{ $media->deskripsi }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Mulai</label>
-                                                        <input type="text" class="form-control" value="{{ $media->waktu_mulai }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Selesai </label>
-                                                        <input type="text" class="form-control" value="{{ $media->waktu_selesai }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Bidang </label>
-                                                        <input type="text" class="form-control" value="{{ $media->bidang->nama }}" readonly>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Ruangan </label>
-                                                        <input type="text" class="form-control" value="{{ $media->ruangan->nama_ruangan }}" readonly>
+                                                        <label>Gambar</label>
+                                                        <input type="text" class="form-control" value="{{ $media->image }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label>Status</label>
                                                         <input type="text" class="form-control" value="{{ $media->status }}" readonly>
                                                     </div>
-
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -221,39 +176,7 @@
 
                                                     <div class="modal-body">
 
-                                                        <div class="mb-3">
-                                                            <label>Nama</label>
-                                                            <input type="text" class="form-control" name="nama_kegiatan" value="{{ $kegiatan->nama_kegiatan }}">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Deskripsi</label>
-                                                            <input type="text" class="form-control" name="deskripsi" value="{{ $kegiatan->deskripsi }}">
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="html5-datetime-local-input" class="col-form-label">Waktu Mulai</label>
-                                                            <div class="col-md-12">
-                                                                <input class="form-control" name="waktu_mulai" type="datetime-local" id="html5-datetime-local-input" />
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="mb-3 row">
-                                                            <label for="html5-datetime-local-input" class="col-form-label">Waktu Selesai</label>
-                                                            <div class="col-md-12">
-                                                                <input class="form-control" name="waktu_selesai" type="datetime-local" id="html5-datetime-local-input" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Bidang </label>
-                                                            <input type="text" class="form-control" name="bidang_id" value="{{ $kegiatan->bidang->nama }}">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Ruangan </label>
-                                                            <input type="text" class="form-control" name="ruangan_id" value="{{ $kegiatan->ruangan->nama }}">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Status</label>
-                                                            <input type="text" class="form-control" name="status" value="{{ $kegiatan->status }}">
-                                                        </div>
 
                                                     </div>
 
