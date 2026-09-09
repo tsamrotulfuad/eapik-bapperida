@@ -15,18 +15,18 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col bg-primary">
+            <div class="col-6">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active data-bs-interval=" 5000">
-                            <img src="..." class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="..." class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="..." class="d-block w-100" alt="...">
-                        </div>
+                        @forelse ($media as $item)
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="5000">
+                                <img src="{{ asset('storage/' . $item->image) }}" class="d-block w-100" alt="{{ $item->title ?? 'Media' }}" style="height: 50vh; object-fit: cover;">
+                            </div>
+                        @empty
+                            <div class="carousel-item active" data-bs-interval="5000">
+                                <img src="{{ asset('img/logo/logo.png') }}" class="d-block w-100" alt="No Media" style="height: 100vh; object-fit: cover;">
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>

@@ -89,12 +89,12 @@
                                                             @if($media->image)
                                                             <img src="{{ asset('storage/' . $media->image) }}"
                                                                 alt="{{ $media->title }}"
-                                                                style="width: 65px; height: 90px; object-fit: cover; border-radius: 4px;">
+                                                                style="width: 115px; height: 90px; object-fit: cover; border-radius: 4px;">
                                                             @else
                                                             <!-- Optional fallback image -->
                                                             <img src="{{ asset('images/default-thumbnail.png') }}"
                                                                 alt="No Image"
-                                                                style="width: 65px; height: 90px;">
+                                                                style="width: 115px; height: 90px;">
                                                             @endif
                                                         </div>
                                                     </div>
