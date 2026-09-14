@@ -94,51 +94,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse ($agenda as $item)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $item->acara }}</td>
+                            <td>{{ Carbon::parse($item->tanggal_agenda)->isoFormat('D MMMM Y') }}</td>
+                            <td>{{ $item->tempat }}</td>
+                            <td>{{ $item->waktu }}</td>
+                            <td>{{ $item->pengundang }}</td>
+                            <td>{{ $item->petugas_hadir }}</td>
                         </tr>
+                        @empty
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
+                            <td colspan="7" class="text-center">Tidak ada agenda kegiatan yang tersedia.</td>
                         </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

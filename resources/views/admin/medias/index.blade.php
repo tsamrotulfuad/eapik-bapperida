@@ -113,14 +113,10 @@
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
-                                            <!-- Delete -->
-                                            <form action="/admin/medias/{{ $media->id }}" method="POST" style="display:inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-sm btn-delete">
-                                                    <i class="bx bx-trash"></i>
-                                                </button>
-                                            </form>
+                                             <!-- Delete -->
+                                            <button class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#deleteMedia{{ $media->id }}">
+                                                <i class="bx bx-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
 
@@ -192,6 +188,38 @@
 
                                                 </form>
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- Delete confirmation modal --}}
+                                    <div class="modal fade" id="deleteMedia{{ $media->id }}" tabindex="-1">
+                                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <form action="/admin/medias/{{ $media->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <p class="mb-0 text-wrap">
+                                                            Apakah Anda yakin ingin menghapus data media
+                                                            <strong class="text-wrap">{{ $media->title }}</strong>?
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            Batal
+                                                        </button>
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="bx bx-trash"></i> Hapus
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

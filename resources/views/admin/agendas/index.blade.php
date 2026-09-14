@@ -30,12 +30,32 @@
 
                                                 <div class="mb-3">
                                                     <label>Nama</label>
-                                                    <input type="text" name="nama" class="form-control" required>
+                                                    <input type="text" name="nama_agenda" class="form-control" required>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label>Keterangan</label>
-                                                    <input type="text" name="keterangan" class="form-control" required>
+                                                    <label>Tanggal</label>
+                                                    <input type="date" name="tanggal_agenda" class="form-control" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label>Tempat</label>
+                                                    <input type="text" name="tempat_agenda" class="form-control" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label>Waktu</label>
+                                                    <input type="time" name="waktu_agenda" class="form-control" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label>Pengundang</label>
+                                                    <input type="text" name="pengundang" class="form-control" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label>Petugas Hadir</label>
+                                                    <input type="text" name="petugas_hadir" class="form-control" required>
                                                 </div>
 
                                             </div>
@@ -61,9 +81,13 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th style="width: 2%;">No</th>
                                         <th>Nama</th>
-                                        <th>Keterangan</th>
+                                        <th>Tanggal</th>
+                                        <th>Tempat</th>
+                                        <th>Waktu</th>
+                                        <th>Pengundang</th>
+                                        <th>Petugas Hadir</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -71,7 +95,12 @@
                                     @foreach ($agendas as $agenda)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $agenda->nama }}</td>
+                                        <td>{{ $agenda->nama_agenda }}</td>
+                                        <td>{{ $agenda->tanggal_agenda }}</td>
+                                        <td>{{ $agenda->tempat_agenda }}</td>
+                                        <td>{{ $agenda->waktu_agenda }}</td>
+                                        <td>{{ $agenda->pengundang }}</td>
+                                        <td>{{ $agenda->petugas_hadir }}</td>
                                         <td>
                                             <!-- Show -->
                                             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showAgenda{{ $agenda->id }}">
