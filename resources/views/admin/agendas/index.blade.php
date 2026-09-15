@@ -45,7 +45,7 @@
 
                                                 <div class="mb-3">
                                                     <label>Waktu</label>
-                                                    <input type="time" name="waktu_agenda" class="form-control" required>
+                                                    <input type="time" name="waktu" class="form-control" required>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -98,7 +98,7 @@
                                         <td>{{ $agenda->nama_agenda }}</td>
                                         <td>{{ $agenda->tanggal_agenda }}</td>
                                         <td>{{ $agenda->tempat_agenda }}</td>
-                                        <td>{{ $agenda->waktu_agenda }}</td>
+                                        <td>{{ $agenda->waktu }}</td>
                                         <td>{{ $agenda->pengundang }}</td>
                                         <td>{{ $agenda->petugas_hadir }}</td>
                                         <td>
@@ -137,12 +137,22 @@
 
                                                     <div class="mb-3">
                                                         <label>Nama</label>
-                                                        <input type="text" class="form-control" value="{{ $agenda->nama }}" readonly>
+                                                        <input type="text" class="form-control" value="{{ $agenda->nama_agenda }}" readonly>
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label>Keterangan</label>
-                                                        <input type="text" class="form-control" value="{{ $agenda->keterangan }}" readonly>
+                                                        <label>Tanggal</label>
+                                                        <input type="text" class="form-control" value="{{ $agenda->tanggal_agenda }}" readonly>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label>Tempat</label>
+                                                        <input type="text" class="form-control" value="{{ $agenda->tempat_agenda }}" readonly>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label>Tempat</label>
+                                                        <input type="text" class="form-control" value="{{ $agenda->tempat_agenda }}" readonly>
                                                     </div>
 
                                                 </div>

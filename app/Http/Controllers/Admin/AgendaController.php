@@ -31,7 +31,21 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 1. Validasi Input (Pastikan file_dokumen dan cover divalidasi sebagai file/image)
+        $request->validate([
+            'nama_agenda' => 'required',
+            'tanggal_agenda' => 'required',
+            'tempat_agenda' => 'required',
+            'waktu' => 'required',
+            'pengundang' => 'required',
+            'petugas_hadir' => 'required',
+        ]);
+
+        // Simpan data agenda ke database
+        Agenda::create($request->all());
+
+        return redirect('/admin/agendas')->with('success', 'Agenda Berhasil ditambahkan!');
+
     }
 
     /**
