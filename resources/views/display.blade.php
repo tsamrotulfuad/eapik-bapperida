@@ -20,7 +20,7 @@
                     <div class="carousel-inner">
                         @forelse ($media as $item)
                             <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="5000">
-                                <img src="{{ asset('storage/' . $item->image) }}" class="d-block w-100" alt="{{ $item->title ?? 'Media' }}" style="height: 50vh; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $item->image) }}" class="d-block w-100" alt="{{ $item->title ?? 'Media' }}" style="height: auto; object-fit: cover;">
                             </div>
                         @empty
                             <div class="carousel-item active" data-bs-interval="5000">
