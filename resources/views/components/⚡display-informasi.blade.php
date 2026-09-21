@@ -56,9 +56,9 @@ new class extends Component
                     <div class="card" style="width: auto;">
                         <div class="card-body">
                             <div class="row">
-                                <h3 class="card-title mb-3">
+                                <h4 class="card-title mb-3">
                                     {{ $kegiatan->nama_kegiatan }}
-                                </h3>
+                                </h4>
                                 <h5 class="card-subtitle mb-2 text-body-secondary">Tempat: {{ $kegiatan->ruangan->nama_ruangan }}</h5>
                             </div>
                             <div class="row my-1">
@@ -69,7 +69,8 @@ new class extends Component
                                     <h6 class="card-subtitle text-body-secondary">Tanggal: {{ $kegiatan->tanggal_kegiatan }}</h6>
                                 </div>
                                 <div class="col-3 text-end">
-                                    <h6 class="card-subtitle text-body-secondary">Waktu: {{ $kegiatan->waktu_mulai }}</h6>
+                                    <h6 class="card-subtitle text-body-secondary">Waktu: {{ \Carbon\Carbon::parse($kegiatan->waktu_mulai)->locale('id')->translatedFormat('H:i') }}</h6>
+                            
                                 </div>
                             </div>
                         </div>
@@ -108,10 +109,10 @@ new class extends Component
                 <table class="table table-striped mb-0">
                     <thead>
                         <tr>
-                            <th scope="col" style="width: 5%">No</th>
-                            <th scope="col" style="width: 25%">Acara</th>
-                            <th scope="col" style="width: 12%">Tanggal</th>
-                            <th scope="col" style="width: 20%">Tempat</th>
+                            <th scope="col" style="width: 3%">No</th>
+                            <th scope="col" style="width: 35%">Acara</th>
+                            <th scope="col" style="width: 10%">Tanggal</th>
+                            <th scope="col" style="width: 10%">Tempat</th>
                             <th scope="col" style="width: 8%">Waktu</th>
                             <th scope="col" style="width: 15%">Pengundang</th>
                             <th scope="col" style="width: 15%">Petugas Hadir</th>
@@ -127,11 +128,11 @@ new class extends Component
                             <tbody>
                                 @forelse ($agenda as $item)
                                 <tr>
-                                    <td style="width: 5%">{{ $loop->iteration }}</td>
-                                    <td style="width: 25%">{{ $item->nama_agenda }}</td>
-                                    <td style="width: 12%">{{ \Carbon\Carbon::parse($item->tanggal_agenda)->isoFormat('D MMMM Y') }}</td>
-                                    <td style="width: 20%">{{ $item->tempat_agenda }}</td>
-                                    <td style="width: 8%">{{ $item->waktu }}</td>
+                                    <td style="width: 3%">{{ $loop->iteration }}</td>
+                                    <td style="width: 35%">{{ $item->nama_agenda }}</td>
+                                    <td style="width: 10%">{{ \Carbon\Carbon::parse($item->tanggal_agenda)->isoFormat('D MMMM Y') }}</td>
+                                    <td style="width: 10%">{{ $item->tempat_agenda }}</td>
+                                    <td style="width: 8%">{{ \Carbon\Carbon::parse($item->waktu)->locale('id')->translatedFormat('H:i') }}</td>
                                     <td style="width: 15%">{{ $item->pengundang }}</td>
                                     <td style="width: 15%">{{ $item->petugas_hadir }}</td>
                                 </tr>
