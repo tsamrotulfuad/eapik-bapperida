@@ -16,7 +16,11 @@ new class extends Component
             'kegiatanHariIni' => Kegiatan::with(['ruangan', 'bidang'])
                 ->whereDate('tanggal_kegiatan', today())
                 ->get(),
-            'agenda' => Agenda::where('tanggal_agenda', '>=', Carbon::now()->subDays(7))->get(),
+            'agenda' => Agenda::whereBetween('tanggal_agenda', [
+                Carbon::now()->startOfDay(),
+                Carbon::now()->addDays(7)->endOfDay()
+            ])
+                ->get()
         ];
     }
 };
@@ -29,13 +33,13 @@ new class extends Component
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" wire:ignore>
                 <div class="carousel-inner">
                     @forelse ($media as $item)
-                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="5000">
-                            <img src="{{ asset('storage/' . $item->image) }}" class="d-block w-100" alt="{{ $item->title ?? 'Media' }}" style="height: auto; object-fit: cover;">
-                        </div>
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="5000">
+                        <img src="{{ asset('storage/' . $item->image) }}" class="d-block w-100" alt="{{ $item->title ?? 'Media' }}" style="height: auto; object-fit: cover;">
+                    </div>
                     @empty
-                        <div class="carousel-item active" data-bs-interval="5000">
-                            <img src="{{ asset('img/logo/logo.png') }}" class="d-block w-100" alt="No Media" style="height: 100vh; object-fit: cover;">
-                        </div>
+                    <div class="carousel-item active" data-bs-interval="5000">
+                        <img src="{{ asset('img/logo/logo.png') }}" class="d-block w-100" alt="No Media" style="height: 100vh; object-fit: cover;">
+                    </div>
                     @endforelse
                 </div>
             </div>
@@ -52,16 +56,19 @@ new class extends Component
                     <div class="card" style="width: auto;">
                         <div class="card-body">
                             <div class="row">
-                                <h5 class="card-title mb-3">
+                                <h3 class="card-title mb-3">
                                     {{ $kegiatan->nama_kegiatan }}
-                                </h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">Tempat: {{ $kegiatan->ruangan->nama_ruangan }}</h6>
+                                </h3>
+                                <h5 class="card-subtitle mb-2 text-body-secondary">Tempat: {{ $kegiatan->ruangan->nama_ruangan }}</h5>
                             </div>
-                            <div class="row my-2">
-                                <div class="col">
+                            <div class="row my-1">
+                                <div class="col-6">
                                     <h6 class="card-subtitle text-body-secondary">Bidang: {{ $kegiatan->bidang->keterangan }}</h6>
                                 </div>
-                                <div class="col">
+                                <div class="col-3 text-end">
+                                    <h6 class="card-subtitle text-body-secondary">Tanggal: {{ $kegiatan->tanggal_kegiatan }}</h6>
+                                </div>
+                                <div class="col-3 text-end">
                                     <h6 class="card-subtitle text-body-secondary">Waktu: {{ $kegiatan->waktu_mulai }}</h6>
                                 </div>
                             </div>
@@ -93,38 +100,51 @@ new class extends Component
             <h5 class="card-title">Daftar Agenda Kegiatan</h5>
         </div>
     </div>
+
     <div class="row">
         <div class="col">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col" style="width: 3%">No</th>
-                        <th scope="col" style="width: 25%">Acara</th>
-                        <th scope="col" style="width: 12%">Tanggal</th>
-                        <th scope="col" style="width: 20%">Tempat</th>
-                        <th scope="col" style="width: 8%">Waktu</th>
-                        <th scope="col" style="width: 10%">Pengundang</th>
-                        <th scope="col" style="width: 10%">Petugas Hadir</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($agenda as $item)
-                    <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $item->acara }}</td>
-                        <td>{{ Carbon::parse($item->tanggal_agenda)->isoFormat('D MMMM Y') }}</td>
-                        <td>{{ $item->tempat }}</td>
-                        <td>{{ $item->waktu }}</td>
-                        <td>{{ $item->pengundang }}</td>
-                        <td>{{ $item->petugas_hadir }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="7" class="text-center">Tidak ada agenda kegiatan yang tersedia.</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <div class="fixed-header-table">
+                <!-- 1. HEADER TABEL (DIAM / FIXED) -->
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 5%">No</th>
+                            <th scope="col" style="width: 25%">Acara</th>
+                            <th scope="col" style="width: 12%">Tanggal</th>
+                            <th scope="col" style="width: 20%">Tempat</th>
+                            <th scope="col" style="width: 8%">Waktu</th>
+                            <th scope="col" style="width: 15%">Pengundang</th>
+                            <th scope="col" style="width: 15%">Petugas Hadir</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <!-- 2. KONTAINER BODY TABEL (HANYA INI YANG DISCROLL) -->
+                <div class="table-body-container">
+                    <!-- Kelas 'credits-scroll' HANYA aktif jika data $agenda lebih dari 7 -->
+                    <div class="{{ count($agenda) > 7 ? 'credits-scroll' : '' }}">
+                        <table class="table table-striped mb-0">
+                            <tbody>
+                                @forelse ($agenda as $item)
+                                <tr>
+                                    <td style="width: 5%">{{ $loop->iteration }}</td>
+                                    <td style="width: 25%">{{ $item->nama_agenda }}</td>
+                                    <td style="width: 12%">{{ \Carbon\Carbon::parse($item->tanggal_agenda)->isoFormat('D MMMM Y') }}</td>
+                                    <td style="width: 20%">{{ $item->tempat_agenda }}</td>
+                                    <td style="width: 8%">{{ $item->waktu }}</td>
+                                    <td style="width: 15%">{{ $item->pengundang }}</td>
+                                    <td style="width: 15%">{{ $item->petugas_hadir }}</td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">Tidak ada agenda kegiatan yang tersedia.</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

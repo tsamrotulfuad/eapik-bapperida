@@ -36,8 +36,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('admin/assets/js/config.js') }}"></script>
-
-    {{-- @vite('resources/css/app.css') --}}
+    @vite([])
 </head>
 
 <body>
@@ -50,7 +49,7 @@
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
                         <span class="app-brand-logo demo">
-                            <img src="{{ asset('img/logo/logo-eapik.png')}}" style="width: 15%" alt="">
+                            <img src="{{ asset('img/logo/logo-eapik.png') }}" style="width: 15%" alt="">
                         </span>
                         {{-- <span class="app-brand-text demo menu-text fw-bolder ms-2">E-APIK</span> --}}
                     </a>
@@ -63,14 +62,15 @@
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
-                    <!-- Dashboard -->
-                <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"> {{-- active --}}
+                    <!-- Dashboard (Dapat diakses Admin & Front Office) -->
+                    <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
                     </li>
-                    <!-- Menu -->
+
+                    <!-- Main Menu (Dapat diakses Admin & Front Office) -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Main Menu</span>
                     </li>
@@ -86,6 +86,9 @@
                             <div data-i18n="Analytics">Kegiatan</div>
                         </a>
                     </li>
+
+                    {{-- Menu Khusus Admin (Bukan Front Office) --}}
+                    @if(auth()->user()->ket === 'admin')
                     <!-- Bidang Rendalev -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Rendalev</span>
@@ -96,6 +99,7 @@
                             <div data-i18n="Analytics">Usulan</div>
                         </a>
                     </li>
+
                     <!-- Pemerintah dan PM -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Pemerintah dan PM</span>
@@ -106,6 +110,7 @@
                             <div data-i18n="Analytics">Kemiskinan</div>
                         </a>
                     </li>
+
                     <!-- Ekonomi dan Infra -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Ekonomi dan Infra</span>
@@ -116,6 +121,7 @@
                             <div data-i18n="Analytics">Usulan</div>
                         </a>
                     </li>
+
                     <!-- Bidang RiDa -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Riset dan Inovasi</span>
@@ -126,7 +132,7 @@
                             <div data-i18n="Analytics">Inovasi Daerah</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->routeIs('kajians.index') ? 'active' : '' }}">
                         <a href="{{ route('kajians.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-book-open"></i>
                             <div data-i18n="Analytics">Kajian</div>
@@ -138,6 +144,7 @@
                             <div data-i18n="Analytics">Infografis</div>
                         </a>
                     </li>
+
                     <!-- Setting -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Setting</span>
@@ -166,6 +173,7 @@
                             <div data-i18n="Analytics">Media</div>
                         </a>
                     </li>
+                    @endif
 
                 </ul>
             </aside>
@@ -202,7 +210,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
+                                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>
@@ -256,7 +264,6 @@
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear());
-
                                 </script> Made with ❤️
                             </div>
                         </div>

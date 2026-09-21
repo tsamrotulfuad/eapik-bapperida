@@ -69,7 +69,23 @@ class AgendaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // 1. Validasi Input
+        $request->validate([
+            'nama_agenda' => 'required',
+            'tanggal_agenda' => 'required',
+            'tempat_agenda' => 'required',
+            'waktu' => 'required',
+            'pengundang' => 'required',
+            'petugas_hadir' => 'required',
+        ]);
+
+        // 2. Temukan agenda berdasarkan ID
+        $agenda = Agenda::findOrFail($id);
+
+        // 3. Update data agenda
+        $agenda->update($request->all());
+
+        return redirect('/admin/agendas')->with('success', 'Agenda Berhasil diperbarui!');
     }
 
     /**
@@ -77,6 +93,9 @@ class AgendaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $agenda = Agenda::findOrFail($id);
+        $agenda->delete();
+
+        return redirect('/admin/agendas')->with('success', 'Agenda Berhasil dihapus!');
     }
 }

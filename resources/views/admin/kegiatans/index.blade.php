@@ -44,62 +44,62 @@
                                                     </div>
                                                 </div>
 
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Mulai</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" name="waktu_mulai" type="time" id="html5-time-input" />
-                                                        </div>
+                                                <div class="mb-3 row">
+                                                    <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Mulai</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" name="waktu_mulai" type="time" id="html5-time-input" />
                                                     </div>
-
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Selesai</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" name="waktu_selesai" type="time" id="html5-time-input" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="bidang" class="form-label">Bidang</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="bidang_id">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            {{-- Lakukan looping data model lain --}}
-                                                            @foreach ($bidangs as $bidang)
-                                                            <option value="{{ $bidang->id }}">{{ $bidang->nama }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="ruangan" class="form-label">Ruangan</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="ruangan_id">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            {{-- Lakukan looping data model lain --}}
-                                                            @foreach ($ruangans as $ruangan)
-                                                            <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="status" class="form-label">Status</label>
-                                                        <select class="form-select" id="status" aria-label="Status" name="status">
-                                                            <option selected>Pilih Salah Satu</option>
-                                                            <option value="terjadwal">Terjadwal</option>
-                                                            <option value="berlangsung">Berlangsung</option>
-                                                            <option value="selesai">Selesai</option>
-                                                            <option value="batal">Batal</option>
-                                                        </select>
-                                                    </div>
-
                                                 </div>
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        Batal
-                                                    </button>
-
-                                                    <button class="btn btn-primary">
-                                                        Simpan
-                                                    </button>
+                                                <div class="mb-3 row">
+                                                    <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Waktu Selesai</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" name="waktu_selesai" type="time" id="html5-time-input" />
+                                                    </div>
                                                 </div>
+
+                                                <div class="mb-3">
+                                                    <label for="bidang" class="form-label">Bidang</label>
+                                                    <select class="form-select" id="bidang" aria-label="Bidang" name="bidang_id">
+                                                        <option selected>Pilih Salah Satu</option>
+                                                        {{-- Lakukan looping data model lain --}}
+                                                        @foreach ($bidangs as $bidang)
+                                                        <option value="{{ $bidang->id }}">{{ $bidang->nama }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ruangan" class="form-label">Ruangan</label>
+                                                    <select class="form-select" id="ruangan" aria-label="Ruangan" name="ruangan_id">
+                                                        <option selected>Pilih Salah Satu</option>
+                                                        {{-- Lakukan looping data model lain --}}
+                                                        @foreach ($ruangans as $ruangan)
+                                                        <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="status" class="form-label">Status</label>
+                                                    <select class="form-select" id="status" aria-label="Status" name="status">
+                                                        <option selected>Pilih Salah Satu</option>
+                                                        <option value="terjadwal">Terjadwal</option>
+                                                        <option value="berlangsung">Berlangsung</option>
+                                                        <option value="selesai">Selesai</option>
+                                                        <option value="batal">Batal</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Batal
+                                                </button>
+
+                                                <button class="btn btn-primary">
+                                                    Simpan
+                                                </button>
+                                            </div>
 
                                         </form>
 
@@ -141,11 +141,11 @@
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
-                                            <!-- Delete -->
-                                            <form action="/admin/kegiatans/{{ $kegiatan->id }}" method="POST" style="display:inline">
+                                            <!-- Delete Form -->
+                                            <form action="{{ url('/admin/kegiatans/' . $kegiatan->id) }}" method="POST" style="display:inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger btn-sm btn-delete">
+                                                <button type="submit" class="btn btn-danger btn-sm btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     <i class="bx bx-trash"></i>
                                                 </button>
                                             </form>
@@ -173,19 +173,23 @@
                                                         <input type="text" class="form-control" value="{{ $kegiatan->deskripsi }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
+                                                        <label>Tanggal</label>
+                                                        <input type="text" class="form-control" value="{{ $kegiatan->tanggal_kegiatan }}" readonly>
+                                                    </div>
+                                                    <div class="mb-3">
                                                         <label>Mulai</label>
                                                         <input type="text" class="form-control" value="{{ $kegiatan->waktu_mulai }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label>Selesai </label>
+                                                        <label>Selesai</label>
                                                         <input type="text" class="form-control" value="{{ $kegiatan->waktu_selesai }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label>Bidang </label>
+                                                        <label>Bidang</label>
                                                         <input type="text" class="form-control" value="{{ $kegiatan->bidang->nama }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label>Ruangan </label>
+                                                        <label>Ruangan</label>
                                                         <input type="text" class="form-control" value="{{ $kegiatan->ruangan->nama_ruangan }}" readonly>
                                                     </div>
                                                     <div class="mb-3">
@@ -229,26 +233,47 @@
                                                             <label>Deskripsi</label>
                                                             <input type="text" class="form-control" name="deskripsi" value="{{ $kegiatan->deskripsi }}">
                                                         </div>
+                                                        <div class="mb-3">
+                                                            <label>Tanggal Kegiatan</label>
+                                                            <input type="date" class="form-control" id="html5-date-input" name="tanggal_kegiatan" value="{{ $kegiatan->tanggal_kegiatan }}">
+                                                        </div>
                                                         <div class="mb-3 row">
                                                             <label for="html5-datetime-local-input" class="col-form-label">Waktu Mulai</label>
                                                             <div class="col-md-12">
-                                                                <input class="form-control" name="waktu_mulai" type="datetime-local" id="html5-datetime-local-input" />
+                                                                <input class="form-control" name="waktu_mulai" type="time" id="html5-time-input"
+                                                                    value="{{ $kegiatan->waktu_mulai }}" />
                                                             </div>
                                                         </div>
 
                                                         <div class="mb-3 row">
                                                             <label for="html5-datetime-local-input" class="col-form-label">Waktu Selesai</label>
                                                             <div class="col-md-12">
-                                                                <input class="form-control" name="waktu_selesai" type="datetime-local" id="html5-datetime-local-input" />
+                                                                <input class="form-control" name="waktu_selesai" type="time" id="html5-time-input"
+                                                                    value="{{ $kegiatan->waktu_selesai }}" />
                                                             </div>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label>Bidang </label>
-                                                            <input type="text" class="form-control" name="bidang_id" value="{{ $kegiatan->bidang->nama }}">
+                                                            <label for="edit_bidang_{{ $kegiatan->id }}" class="form-label">Bidang</label>
+                                                            <select class="form-select" name="bidang_id" id="edit_bidang_{{ $kegiatan->id }}" required>
+                                                                <option value="">Pilih Bidang</option>
+                                                                @foreach($bidangs as $bidang)
+                                                                <option value="{{ $bidang->id }}" {{ old('bidang_id', $kegiatan->bidang_id) == $bidang->id ? 'selected' : '' }}>
+                                                                    {{ $bidang->nama }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
+
                                                         <div class="mb-3">
-                                                            <label>Ruangan </label>
-                                                            <input type="text" class="form-control" name="ruangan_id" value="{{ $kegiatan->ruangan->nama }}">
+                                                            <label for="edit_ruangan_{{ $kegiatan->id }}" class="form-label">Ruangan</label>
+                                                            <select class="form-select" name="ruangan_id" id="edit_ruangan_{{ $kegiatan->id }}" required>
+                                                                <option value="">Pilih Ruangan</option>
+                                                                @foreach($ruangans as $ruangan)
+                                                                <option value="{{ $ruangan->id }}" {{ old('ruangan_id', $kegiatan->ruangan_id) == $ruangan->id ? 'selected' : '' }}>
+                                                                    {{ $ruangan->nama_ruangan }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label>Status</label>

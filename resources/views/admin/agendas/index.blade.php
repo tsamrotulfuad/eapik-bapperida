@@ -112,11 +112,11 @@
                                                 <i class="bx bx-edit"></i>
                                             </button>
 
-                                            <!-- Delete -->
-                                            <form action="/admin/agendas/{{ $agenda->id }}" method="POST" style="display:inline">
+                                            <!-- Delete Form -->
+                                            <form action="{{ url('/admin/agendas/' . $agenda->id) }}" method="POST" style="display:inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger btn-sm">
+                                                <button type="submit" class="btn btn-danger btn-sm btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     <i class="bx bx-trash"></i>
                                                 </button>
                                             </form>
@@ -137,22 +137,32 @@
 
                                                     <div class="mb-3">
                                                         <label>Nama</label>
-                                                        <input type="text" class="form-control" value="{{ $agenda->nama_agenda }}" readonly>
+                                                        <input type="text" name="nama_agenda" class="form-control" readonly value="{{ $agenda->nama_agenda }}">
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label>Tanggal</label>
-                                                        <input type="text" class="form-control" value="{{ $agenda->tanggal_agenda }}" readonly>
+                                                        <input type="date" name="tanggal_agenda" class="form-control" readonly value="{{ $agenda->tanggal_agenda }}">
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label>Tempat</label>
-                                                        <input type="text" class="form-control" value="{{ $agenda->tempat_agenda }}" readonly>
+                                                        <input type="text" name="tempat_agenda" class="form-control" readonly value="{{ $agenda->tempat_agenda }}">
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label>Tempat</label>
-                                                        <input type="text" class="form-control" value="{{ $agenda->tempat_agenda }}" readonly>
+                                                        <label>Waktu</label>
+                                                        <input type="time" name="waktu" class="form-control" readonly value="{{ $agenda->waktu }}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label>Pengundang</label>
+                                                        <input type="text" name="pengundang" class="form-control" readonly value="{{ $agenda->pengundang }}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label>Petugas Hadir</label>
+                                                        <input type="text" name="petugas_hadir" class="form-control" readonly value="{{ $agenda->petugas_hadir }}">
                                                     </div>
 
                                                 </div>
@@ -185,12 +195,32 @@
 
                                                         <div class="mb-3">
                                                             <label>Nama</label>
-                                                            <input type="text" name="nama" class="form-control" value="{{ $agenda->nama }}" required>
+                                                            <input type="text" name="nama_agenda" class="form-control" value="{{ $agenda->nama_agenda }}" required>
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label>keterangan</label>
-                                                            <input type="text" name="keterangan" class="form-control" value="{{ $agenda->keterangan }}" required>
+                                                            <label>Tanggal</label>
+                                                            <input type="date" name="tanggal_agenda" class="form-control" value="{{ $agenda->tanggal_agenda }}" required>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label>Tempat</label>
+                                                            <input type="text" name="tempat_agenda" class="form-control" value="{{ $agenda->tempat_agenda }}" required>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label>Waktu</label>
+                                                            <input type="time" name="waktu" class="form-control" value="{{ $agenda->waktu }}" required>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label>Pengundang</label>
+                                                            <input type="text" name="pengundang" class="form-control" value="{{ $agenda->pengundang }}" required>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label>Petugas Hadir</label>
+                                                            <input type="text" name="petugas_hadir" class="form-control" value="{{ $agenda->petugas_hadir }}" required>
                                                         </div>
 
                                                     </div>
