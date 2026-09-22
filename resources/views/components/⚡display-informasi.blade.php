@@ -20,7 +20,8 @@ new class extends Component
                 Carbon::now()->startOfDay(),
                 Carbon::now()->addDays(7)->endOfDay()
             ])
-                ->get()
+            ->orderBy('tanggal_agenda', 'asc')
+            ->get()
         ];
     }
 };
@@ -29,7 +30,7 @@ new class extends Component
 <div class="container-fluid" wire:poll.60s>
     <div class="row">
         <!-- Carousel Media (Dilindungi dengan wire:ignore agar tidak ter-reset saat polling) -->
-        <div class="col-6">
+        <div class="col-8">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" wire:ignore>
                 <div class="carousel-inner">
                     @forelse ($media as $item)
@@ -46,13 +47,13 @@ new class extends Component
         </div>
 
         <!-- Informasi Kegiatan -->
-        <div class="col">
+        <div class="col-4">
             <div class="row">
-                <h1 class="my-3 px-4">Informasi</h1>
+                <h1 class="my-2 px-4">Informasi</h1>
             </div>
             @forelse ($kegiatanHariIni as $kegiatan)
             <div class="row">
-                <div class="my-3 px-4">
+                <div class="my-2 px-4">
                     <div class="card" style="width: auto;">
                         <div class="card-body">
                             <div class="row">
@@ -122,8 +123,8 @@ new class extends Component
 
                 <!-- 2. KONTAINER BODY TABEL (HANYA INI YANG DISCROLL) -->
                 <div class="table-body-container">
-                    <!-- Kelas 'credits-scroll' HANYA aktif jika data $agenda lebih dari 7 -->
-                    <div class="{{ count($agenda) > 7 ? 'credits-scroll' : '' }}">
+                    <!-- Kelas 'credits-scroll' HANYA aktif jika data $agenda lebih dari 5 -->
+                    <div class="{{ count($agenda) > 5 ? 'credits-scroll' : '' }}">
                         <table class="table table-striped mb-0">
                             <tbody>
                                 @forelse ($agenda as $item)
