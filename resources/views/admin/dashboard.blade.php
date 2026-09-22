@@ -16,7 +16,7 @@
                                  </div>
                              </div>
                              <span class="d-block mb-1">Kegiatan</span>
-                             <h3 class="card-title text-nowrap mb-2">0</h3>
+                             <h3 class="card-title text-nowrap mb-2">{{ $totalKegiatan }}</h3>
                          </div>
                      </div>
                  </div>
@@ -30,7 +30,7 @@
                                  </div>
                              </div>
                              <span class="d-block mb-1">Agenda</span>
-                             <h3 class="card-title text-nowrap mb-2">0</h3>
+                             <h3 class="card-title text-nowrap mb-2">{{ $totalAgenda}}</h3>
                          </div>
                      </div>
                  </div>

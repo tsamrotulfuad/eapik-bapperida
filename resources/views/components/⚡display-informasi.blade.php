@@ -49,7 +49,7 @@ new class extends Component
         <!-- Informasi Kegiatan -->
         <div class="col-4">
             <div class="row">
-                <h1 class="my-2 px-4">Informasi</h1>
+                <h3 class="my-2 px-4">Informasi Rapat Hari Ini</h3>
             </div>
             @forelse ($kegiatanHariIni as $kegiatan)
             <div class="row">
@@ -99,7 +99,7 @@ new class extends Component
     <!-- Tabel Agenda -->
     <div class="row">
         <div class="col my-3">
-            <h5 class="card-title">Daftar Agenda Kegiatan</h5>
+            <h5 class="card-title">Daftar Agenda Rapat Luar (7 Hari Mendatang)</h5>
         </div>
     </div>
 
