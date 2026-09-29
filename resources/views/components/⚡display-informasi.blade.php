@@ -123,8 +123,8 @@ new class extends Component
 
                 <!-- 2. KONTAINER BODY TABEL (HANYA INI YANG DISCROLL) -->
                 <div class="table-body-container">
-                    <!-- Kelas 'credits-scroll' HANYA aktif jika data $agenda lebih dari 5 -->
-                    <div class="{{ count($agenda) > 5 ? 'credits-scroll' : '' }}">
+                    <!-- Kelas 'credits-scroll' HANYA aktif jika data $agenda lebih dari 4 -->
+                    <div class="{{ count($agenda) > 4 ? 'credits-scroll' : '' }}">
                         <table class="table table-striped mb-0">
                             <tbody>
                                 @forelse ($agenda as $item)
