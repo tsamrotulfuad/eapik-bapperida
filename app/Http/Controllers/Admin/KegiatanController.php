@@ -15,7 +15,7 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        $kegiatans = Kegiatan::latest()->get();
+        $kegiatans = Kegiatan::latest()->paginate(10);
         $bidangs = Bidang::all();
         $ruangans = Ruangan::all();
         return view('admin.kegiatans.index', compact('kegiatans', 'bidangs', 'ruangans'));

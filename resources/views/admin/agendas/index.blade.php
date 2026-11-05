@@ -94,12 +94,12 @@
                                 <tbody class="table-border-bottom-0">
                                     @foreach ($agendas as $agenda)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $agenda->nama_agenda }}</td>
+                                        <td>{{ $agendas->firstItem() + $loop->index }}</td>
+                                        <td class="text-wrap">{{ $agenda->nama_agenda }}</td>
                                         <td>{{ $agenda->tanggal_agenda }}</td>
-                                        <td>{{ $agenda->tempat_agenda }}</td>
+                                        <td class="text-wrap">{{ $agenda->tempat_agenda }}</td>
                                         <td>{{ $agenda->waktu }}</td>
-                                        <td>{{ $agenda->pengundang }}</td>
+                                        <td class="text-wrap">{{ $agenda->pengundang }}</td>
                                         <td>{{ $agenda->petugas_hadir }}</td>
                                         <td>
                                             <!-- Show -->
@@ -244,6 +244,9 @@
 
                                 </tbody>
                             </table>
+                            <div class="mt-3 px-3">
+                                {{ $agendas->links() }}
+                            </div>
                         </div>
                     </div>
                     <!--/ Striped Rows -->

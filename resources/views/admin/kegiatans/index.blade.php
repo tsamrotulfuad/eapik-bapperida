@@ -125,7 +125,7 @@
                                     @foreach ($kegiatans as $kegiatan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kegiatan->nama_kegiatan }}</td>
+                                        <td class="text-wrap">{{ $kegiatan->nama_kegiatan }}</td>
                                         <td>{{ $kegiatan->tanggal_kegiatan }}</td>
                                         <td>{{ $kegiatan->waktu_mulai }}</td>
                                         <td>{{ $kegiatan->waktu_selesai }}</td>
@@ -301,6 +301,9 @@
 
                                 </tbody>
                             </table>
+                            <div class="mt-3 px-3">
+                                {{ $kegiatans->links() }}
+                            </div>
                         </div>
                     </div>
                     <!--/ Striped Rows -->

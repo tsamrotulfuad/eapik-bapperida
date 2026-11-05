@@ -13,7 +13,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $agendas = Agenda::all();
+        $agendas = Agenda::latest()->paginate(5);
 
         return view('admin.agendas.index', compact('agendas'));
     }

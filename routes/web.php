@@ -21,7 +21,8 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/kajian', [Kajian::class, 'index'])->name('kajian');
 
 // Display
-Route::get('/display', [DisplayController::class, 'index']);
+Route::get('/display', [DisplayController::class, 'index'])->name('display');
+Route::get('/display-pimpinan', [DisplayController::class, 'pimpinan'])->name('display-pimpinan');
 
 //Register
 Route::get('/register', [HomeController::class, 'index']);
