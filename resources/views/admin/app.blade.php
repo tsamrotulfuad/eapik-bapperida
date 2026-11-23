@@ -87,8 +87,6 @@
                         </a>
                     </li>
 
-                    {{-- Menu Khusus Admin (Bukan Front Office) --}}
-                    @if(auth()->user()->ket === 'admin')
                     <!-- Bidang Rendalev -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Rendalev</span>
@@ -138,8 +136,8 @@
                             <div data-i18n="Analytics">Kajian</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="index.html" class="menu-link">
+                    <li class="menu-item {{ request()->routeIs('infografis.index') ? 'active' : '' }}">
+                        <a href="{{ route('infografis.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-images"></i>
                             <div data-i18n="Analytics">Infografis</div>
                         </a>
@@ -173,7 +171,6 @@
                             <div data-i18n="Analytics">Media</div>
                         </a>
                     </li>
-                    @endif
 
                 </ul>
             </aside>
@@ -210,7 +207,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                                                    <span class="fw-semibold d-block"></span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>

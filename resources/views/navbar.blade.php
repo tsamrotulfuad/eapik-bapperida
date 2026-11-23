@@ -17,8 +17,11 @@
                 <a href="#" class="nav-link link-body-emphasis px-3">Inovasi</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link link-body-emphasis px-3">Kemiskinan</a>
+                <a href="{{ route('infografis') }}" class="nav-link link-body-emphasis px-3">Infografis</a>
             </li>
+            {{-- <li class="nav-item">
+                <a href="#" class="nav-link link-body-emphasis px-3">Kemiskinan</a>
+            </li> --}}
         </ul>
         <ul class="nav">
             {{-- <li class="nav-item">

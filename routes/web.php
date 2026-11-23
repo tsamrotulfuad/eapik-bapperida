@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\BidangController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InfografisController;
 use App\Http\Controllers\Admin\KajianController;
 use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\MediaController;
@@ -11,14 +12,17 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KajianController as Kajian;
 use Illuminate\Support\Facades\Route;
 
 // Home
 Route::get('/', [HomeController::class, 'index']);
 
 // Kajian
-Route::get('/kajian', [Kajian::class, 'index'])->name('kajian');
+Route::get('/kajian', [App\Http\Controllers\KajianController::class, 'index'])->name('kajian');
+
+// Infografis
+Route::get('/infografis', [App\Http\Controllers\InfografisController::class, 'index'])->name('infografis');
+Route::post('/infografis/{id}/view', [App\Http\Controllers\InfografisController::class, 'incrementView'])->name('publik.infografis.view');
 
 // Display
 Route::get('/display', [DisplayController::class, 'index'])->name('display');
@@ -44,5 +48,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('/kegiatans', KegiatanController::class); // Kegiatan
     Route::resource('/medias', MediaController::class); // Media
     Route::resource('/kajians', KajianController::class); // Kajian
+    Route::resource('/infografis', InfografisController::class); // Infografis
 });
 
